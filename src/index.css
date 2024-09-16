@@ -1,0 +1,206 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-image: url(./assets/bg.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.container {
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 2rem auto;
+}
+
+.repo-form {
+  background-color: papayawhip;
+  padding: 1rem;
+  border-radius: 9px;
+}
+
+.repo-form h1 {
+  font-size: 40px;
+  margin-bottom: 1rem;
+}
+
+.repo-form form {
+  display: flex;
+  flex-direction: column;
+}
+.repo-form input,
+select {
+  margin-bottom: 1rem;
+  outline: none;
+  border: none;
+  font-size: 1.5rem;
+  padding: 15px;
+  border-radius: 8px;
+}
+.repo-form .file {
+  width: 100%;
+  border: 1px solid;
+  border-radius: 6px;
+  margin: 1rem 0;
+}
+
+.item-form select {
+  position: relative;
+  width: 50%;
+}
+.item-form select option {
+  position: absolute;
+  flex-wrap: nowrap;
+}
+
+input[type="file"] {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+button {
+  font-size: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+  background-color: bisque;
+}
+
+button:hover {
+  background-color: rgb(255, 255, 250);
+}
+
+.display {
+  width: 80%;
+  background-color: bisque;
+  font-size: 3rem;
+  margin: 0.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.display .repo-cover {
+  border: 2px solid whitesmoke;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid bisque;
+}
+
+.display img {
+  width: 30%;
+  height: 40%;
+  border-radius: 10px;
+}
+
+.display .icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.icons .pencil {
+  color: rgb(109, 148, 109);
+  cursor: pointer;
+}
+.icons .pencil:hover {
+  color: green;
+}
+.icons .trash {
+  color: rgb(207, 107, 107);
+  cursor: pointer;
+}
+.icons .trash:hover {
+  color: red;
+}
+
+.name,
+.category {
+  text-transform: capitalize;
+}
+
+.noItem {
+  font-size: 15px;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 576px) {
+  .repo-form{
+    width: 100%;
+    margin:  1em ;
+  }
+
+
+  .display h1 {
+    font-size: 4rem;
+  }
+
+  .repo-form h1 {
+    font-size: 2rem;
+  }
+  .display img {
+    width: 20%;
+    height: 30%;
+    border-radius: 10px;
+  }
+  .icons .pencil,
+  .trash {
+    font-size: 1rem;
+  }
+
+  .repo-cover p {
+    font-size: 1.5rem;
+  }
+
+  .repo-cover > option {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .display{
+    width: 100%;
+  }
+  
+  .display h1 {
+    font-size: 4rem;
+  }
+
+  .repo-form h1 {
+    font-size: 2rem;
+  }
+  .display img {
+    width: 20%;
+    height: 30%;
+    border-radius: 10px;
+  }
+  .icons .pencil,
+  .trash {
+    font-size: 1rem;
+  }
+
+  .repo-cover p {
+    font-size: 1.5rem;
+    text-transform: capitalize;
+  }
+
+  .repo-cover > option {
+    font-size: 1.5rem;
+  }
+}
