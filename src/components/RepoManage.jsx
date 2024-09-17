@@ -6,6 +6,8 @@ export default function RepoManage() {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("car");
   const [picture, setPicture] = useState(null);
+  const [preview, setPreview] = useState(null); // State for image preview
+  const [editIndex, setEditIndex] = useState(null); // State for editing
 
   // Load items from localStorage when component mounts
   useEffect(() => {
@@ -14,40 +16,62 @@ export default function RepoManage() {
   }, []);
 
   // Function to save items to localStorage
-  //items argument will not let it disapear when reload
   const saveItemsToLocalStorage = (items) => {
     localStorage.setItem("items", JSON.stringify(items));
   };
 
-  // Handle form submission to add a new item
+  // Handle form submission to add or update an item
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (picture) {
+    if (picture || preview) {
       const reader = new FileReader();
       reader.onload = (e) => {
         const newItem = {
-          picture: e.target.result,
+          picture: e.target.result || preview, // Use preview when editing image to know the exack image to edit
+          name,
+          category,
+        };
+
+        let updatedItems;
+        if (editIndex !== null) {
+          // Update existing item
+          updatedItems = items.map((item, index) =>
+            index === editIndex ? newItem : item
+          );
+          setEditIndex(null); // Reset editing state
+        } else {
+          // Add new item
+          updatedItems = [...items, newItem];
+        }
+        //update state in my form and save to local storage and den rest form
+        setItems(updatedItems); 
+        saveItemsToLocalStorage(updatedItems); 
+        resetForm(); 
+      };
+      //how to convert image to base64
+      if (picture) {
+        reader.readAsDataURL(picture); // Convert image to Base64
+      } else {
+        const newItem = {
+          picture: preview, //to edit image
           name,
           category,
         };
 
         const updatedItems = [...items, newItem];
-        setItems(updatedItems); // Update state
-        saveItemsToLocalStorage(updatedItems); // Save to localStorage
-        resetForm(); // Reset form
-      };
-      reader.readAsDataURL(picture); // Convert image to Base64 by js
+        setItems(updatedItems);
+        saveItemsToLocalStorage(updatedItems);
+        resetForm();
+      }
     }
   };
 
-
-
-  // Delete an item from the list
+  // Delete an item from the list and update state den save to localStorage
   const handleDelete = (index) => {
     const updatedItems = items.filter((_, i) => i !== index);
-    setItems(updatedItems); // Update state
-    saveItemsToLocalStorage(updatedItems); // Save to localStorage
+    setItems(updatedItems); 
+    saveItemsToLocalStorage(updatedItems);  
   };
 
   // Edit an existing item
@@ -55,11 +79,32 @@ export default function RepoManage() {
     const item = items[index];
     setName(item.name);
     setCategory(item.category);
+    setPreview(item.picture); // dis will display image preview for the selected item
+    setEditIndex(index); // to make mark index for editing
+  };
 
-    // Remove the item from the list to allow editing
-    const updatedItems = items.filter((_, i) => i !== index);
-    setItems(updatedItems);
-    saveItemsToLocalStorage(updatedItems);
+  // Reset form after submission
+  const resetForm = () => {
+    setName("");
+    setCategory("car");
+    setPicture(null);
+    setPreview(null); // Clear preview
+  };
+
+  // Handle image upload
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    setPicture(file);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result); // to set the image preview
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setPreview(null);
+    }
   };
 
   return (
@@ -72,10 +117,18 @@ export default function RepoManage() {
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => setPicture(e.target.files[0])}
-              required
+              onChange={handleImageUpload}
+              required={!preview} // Require image only if no preview (new item)
             />
           </div>
+
+          {/* Show image preview when available */}
+          {preview && (
+            <div className="image-preview">
+              <img src={preview} alt="Preview"  />
+            </div>
+          )}
+
           <input
             type="text"
             value={name}
@@ -93,7 +146,9 @@ export default function RepoManage() {
             <option value="school">School</option>
             <option value="others">Others</option>
           </select>
-          <button type="submit">Add Item</button>
+          <button type="submit">
+            {editIndex !== null ? "Update Item" : "Add Item"}
+          </button>
         </form>
       </div>
 
