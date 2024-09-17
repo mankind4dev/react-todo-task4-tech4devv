@@ -22,7 +22,7 @@ body {
 }
 
 .repo-form {
-  background-color: papayawhip;
+  background-color: white;
   padding: 1rem;
   border-radius: 9px;
 }
@@ -40,7 +40,7 @@ body {
 select {
   margin-bottom: 1rem;
   outline: none;
-  border: none;
+  border: 2 solid #333;
   font-size: 1.5rem;
   padding: 15px;
   border-radius: 8px;
@@ -76,7 +76,7 @@ button {
   border-radius: 8px;
   outline: none;
   border: none;
-  background-color: bisque;
+  background-color: rgb(218, 212, 212);
 }
 
 button:hover {
@@ -85,7 +85,7 @@ button:hover {
 
 .display {
   width: 80%;
-  background-color: bisque;
+  background-color: white;
   font-size: 3rem;
   margin: 0.5rem;
   padding: 1rem;
@@ -98,7 +98,7 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border-bottom: 1px solid bisque;
+  border-bottom: 1px solid #333;
 }
 
 .display img {
@@ -141,19 +141,24 @@ button:hover {
   margin-top: 1rem;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 376px) {
   .repo-form{
     width: 100%;
-    margin:  1em ;
+    margin:  1rem ;
+  }
+
+  input[type="file"] {
+    font-size: 1.2rem;
+    cursor: pointer;
   }
 
 
   .display h1 {
-    font-size: 4rem;
+    font-size: 1rem;
   }
 
   .repo-form h1 {
-    font-size: 2rem;
+    font-size: 0.5rem;
   }
   .display img {
     width: 20%;
@@ -173,17 +178,94 @@ button:hover {
     font-size: 1.5rem;
   }
 }
+@media screen and (max-width: 476px) {
+  .repo-form{
+    width: 100%;
+    margin:  1rem ;
+  }
+
+  input[type="file"] {
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+
+  .display h1 {
+    font-size: 1rem;
+  }
+
+  .repo-form h1 {
+    font-size: 1.5rem;
+  }
+  .display img {
+    width: 20%;
+    height: 30%;
+    border-radius: 10px;
+  }
+  .icons .pencil,
+  .trash {
+    font-size: 1rem;
+  }
+
+  .repo-cover p {
+    font-size: 1.5rem;
+  }
+
+  .repo-cover > option {
+    font-size: 1.5rem;
+  }
+}
+
+
+@media screen and (max-width: 576px) {
+  .repo-form{
+    width: 100%;
+    margin:  1rem ;
+  }
+
+  input[type="file"] {
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+  .display h1 {
+    font-size: 1.5rem;
+  }
+
+  .repo-form h1 {
+    font-size: 1.5rem;
+  }
+  .display img {
+    width: 20%;
+    height: 30%;
+    border-radius: 10px;
+  }
+  .icons .pencil,
+  .trash {
+    font-size: 1rem;
+  }
+
+  .repo-cover p {
+    font-size: 1.5rem;
+  }
+
+  .repo-cover > option {
+    font-size: 1.5rem;
+  }
+}
+
+
 @media screen and (max-width: 768px) {
   .display{
     width: 100%;
   }
   
   .display h1 {
-    font-size: 4rem;
+    font-size: 3.2rem;
   }
 
   .repo-form h1 {
-    font-size: 2rem;
+    font-size: 1.2rem;
   }
   .display img {
     width: 20%;
